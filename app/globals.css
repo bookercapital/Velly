@@ -7,6 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-velly-from: var(--velly-from);
+  --color-velly-to: var(--velly-to);
+  --color-velly-success: var(--velly-success);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
@@ -49,6 +52,11 @@
 }
 
 :root {
+  --velly-from: #3B82F6;
+  --velly-to: #06B6D4;
+  --velly-success: #10B981;
+  --velly-bg-start: #E8F4FF;
+  --velly-bg-end: #F5F9FF;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -84,6 +92,8 @@
 }
 
 .dark {
+  --velly-bg-start: #0A0F1E;
+  --velly-bg-end: #0D1B3E;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -122,9 +132,34 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background: radial-gradient(ellipse at top, var(--velly-bg-start), var(--velly-bg-end));
+    background-attachment: fixed;
+    min-height: 100vh;
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer components {
+  .velly-glass {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+  .dark .velly-glass {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .velly-gradient {
+    background-image: linear-gradient(to right, var(--velly-from), var(--velly-to));
+  }
+  .velly-gradient-text {
+    background-image: linear-gradient(to right, var(--velly-from), var(--velly-to));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
   }
 }
